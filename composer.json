@@ -1,5 +1,5 @@
 {
-    "name": "laravel/homestead",
+    "name": "studiomado/homestead",
     "description": "A virtual machine for web artisans.",
     "require": {
         "php": ">=5.5.9",
@@ -9,8 +9,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Taylor Otwell",
-            "email": "taylorotwell@gmail.com"
+            "name": "Davide Donattini",
+            "email": "davide@studiomado.it"
         }
     ],
     "autoload": {
