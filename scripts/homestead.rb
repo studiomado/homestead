@@ -77,7 +77,8 @@ class Homestead
       80   => 8000,
       443  => 44300,
       3306 => 33060,
-      5432 => 54320
+      5432 => 54320,
+      27017 => 27017
     }
 
     # Use Default Port Forwarding Unless Overridden
@@ -207,6 +208,12 @@ class Homestead
       end
     end
 
+    # Install MongoDB If Necessary
+    if settings.has_key?("mongodb") && settings["mongodb"]
+      config.vm.provision "shell" do |s|
+        s.path = scriptDir + "/install-mongo.sh"
+      end
+    end
 
     # Configure All Of The Configured Databases
     if settings.has_key?("databases")
@@ -220,6 +227,12 @@ class Homestead
           config.vm.provision "shell" do |s|
             s.name = "Creating Postgres Database"
             s.path = scriptDir + "/create-postgres.sh"
+            s.args = [db]
+          end
+
+          config.vm.provision "shell" do |s|
+            s.name = "Creating Mongo Database: " + db
+            s.path = scriptDir + "/create-mongo.sh"
             s.args = [db]
           end
         end
